@@ -145,13 +145,13 @@ export default function Home() {
                   <div className="mt-6">
                     <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">Curl API</h3>
                     <div className="mockup-code">
-                      <pre data-prefix=">"><code>curl -X POST -H "Content-Type: application/json" -d '&#123;</code></pre> 
-                      <pre data-prefix=" "><code>"prompt": "Enter the prompt",</code></pre> 
-                      <pre data-prefix=" "><code>"maxOutputLength": 100,</code></pre>
-                      <pre data-prefix=" "><code>"model": "gpt-4"</code></pre>
-                      <pre data-prefix=" "><code>&#125;' https://tokencalculation.vercel.app/api/calculate-price</code></pre>
+                      <pre data-prefix=">"><code>curl -X POST -H &#34;Content-Type: application/json&#34; -d &#39;&#123;</code></pre> 
+                      <pre data-prefix=" "><code>&#34;prompt&#34;: &#34;Enter the prompt&#34;,</code></pre> 
+                      <pre data-prefix=" "><code>&#34;maxOutputLength&#34;: 100,</code></pre>
+                      <pre data-prefix=" "><code>&#34;model&#34;: &#34;gpt-4&#34;</code></pre>
+                      <pre data-prefix=" "><code>&#125;&#39; https://tokencalculation.vercel.app/api/calculate-price</code></pre>
                       <pre data-prefix=" "><code></code></pre>
-                      <pre data-prefix=" " className="bg-warning text-warning-content"><code>&#123;"price":"0.0061"&#125;%</code></pre>
+                      <pre data-prefix=" " className="bg-warning text-warning-content"><code>&#123;&#34;price&#34;:&#34;0.0061&#34;&#125;%</code></pre>
                     </div>
                   </div>
                 </div>
