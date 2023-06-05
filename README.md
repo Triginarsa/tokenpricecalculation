@@ -1,38 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Token Price Calculation Web App
 
-## Getting Started
+This is a web application built with Next.js and TypeScript that allows you to calculate the price of token usage based on a given prompt, maximum output length, and model. It utilizes the OpenAI API to perform the calculations.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Input a prompt, maximum output length, and model name.
+- Calculate the price of token usage based on the provided input.
+- API endpoint for external usage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. Navigate to the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   cd your-repo
+   ```
 
-## Learn More
+3. Install the dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Start the development server:
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access the web app.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Enter the prompt, maximum output length, and model name in the provided fields.
+
+4. Click the "Calculate Price" button to calculate the price of token usage.
+
+## API Endpoint
+
+The web app also exposes an API endpoint for calculating the price programmatically.
+
+- **Endpoint**: `/api/calculate-price`
+- **Method**: POST
+- **Request Payload**:
+
+  ```json
+  {
+    "prompt": "Enter the prompt",
+    "maxOutputLength": 100,
+    "model": "gpt-4"
+  }
+  ```
+
+- **Response**:
+
+  ```json
+  {
+    "price": 0.1234
+  }
+  ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
