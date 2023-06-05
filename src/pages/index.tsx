@@ -75,8 +75,8 @@ export default function Home() {
         {/* <Navbar /> */}
           {/* main content */}
           <main className="flex w-full flex-grow">
-            <div className="h-100 mx-auto flex max-w-2xl flex-grow flex-col">
-              <div className="h-100 flex flex-grow items-center justify-center">
+            <div className="mx-auto flex max-w-2xl flex-grow flex-col">
+              <div className="flex flex-grow items-center justify-center">
                 <div className="mx-auto rounded-xl px-10 py-10">
                   <div className="mockup-window border bg-base-300">
                     <div className="px-4 py-16 bg-base-200 space-y-6">
@@ -91,7 +91,7 @@ export default function Home() {
                         </label>
                           <textarea id="prompt" className="textarea textarea-bordered w-full" value={prompt} onChange={handlePromptChange} rows={4} />
                         </div>
-                        <div className="flex flex-col space-y-6 space-x-3 md:flex-row md:space-y-0">
+                        <div className="flex flex-col space-y-6 space-x-0 md:flex-row md:space-y-0 md:space-x-3">
                           <div className="w-full">
                             <label htmlFor="maxOutputLength" className="label">
                               <span className="label-text">Maximum output length:</span>
