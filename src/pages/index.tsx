@@ -31,32 +31,6 @@ export default function Home() {
     "model": "gpt-4"
   }' https://tokencalculation.vercel.app/api/calculate-price`;
 
-  const copyToClipboard = () => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code)
-        .then(() => {
-          setIsCopied(true);
-          setTimeout(() => {
-            setIsCopied(false);
-          }, 2000);
-        })
-        .catch((error) => {
-          console.error('Failed to copy to clipboard:', error);
-        });
-    } else {
-      const textarea = document.createElement('textarea');
-      textarea.value = code;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      setIsCopied(true);
-      setTimeout(() => {
-        setIsCopied(false);
-      }, 2000);
-    }
-  };
-
   const handlePromptChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
   };
@@ -103,6 +77,32 @@ export default function Home() {
     setTotalPrice("");
   };
 
+    const copyToClipboard = () => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error('Failed to copy to clipboard:', error);
+        });
+    } else {
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    }
+  };
+
   return (
     <div className="">
         <div className="z-50 flex h-screen flex-col">
@@ -123,7 +123,7 @@ export default function Home() {
                         <label htmlFor="prompt" className="label">
                           <span className="label-text">Enter the prompt</span>
                         </label>
-                          <textarea id="prompt" className="textarea textarea-bordered w-full" value={prompt} onChange={handlePromptChange} rows={4} />
+                        <textarea id="prompt" className="textarea textarea-bordered w-full" value={prompt} onChange={handlePromptChange} rows={4} />
                         </div>
                         <div className="flex flex-col space-y-6 space-x-0 md:flex-row md:space-y-0 md:space-x-3">
                           <div className="w-full">
