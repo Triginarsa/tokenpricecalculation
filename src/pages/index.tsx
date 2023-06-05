@@ -7,11 +7,15 @@ interface SelectOption {
   label: string;
 }
 
+interface CalculatePriceResponse {
+  price: string;
+}
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [maxOutputLength, setMaxOutputLength] = useState(0);
   const [model, setModel] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handlePromptChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
@@ -37,6 +41,7 @@ export default function Home() {
 
       setTotalPrice(price);
     } catch (error) {
+      setErrorMessage("Error calculating price. Please try again."); // or use error.message to display the specific error
       console.error(error);
     }
   };
@@ -70,6 +75,8 @@ export default function Home() {
       </select>
 
       <button onClick={handleCalculatePrice}>Calculate Price</button>
+
+      {errorMessage && <p>{errorMessage}</p>}
 
       {totalPrice && <p>Estimated price for your query would be: ${totalPrice}</p>}
     </div>

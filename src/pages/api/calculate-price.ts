@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { calculatePrice } from "@/calculatePrice";
+import { calculatePrice, validateModel } from "@/calculatePrice";
 
 interface CalculatePriceRequest {
   prompt: string;
@@ -23,6 +23,8 @@ export default function calculatePriceHandler(req: NextApiRequest, res: NextApiR
   }
 
   try {
+    validateModel(model);
+
     const totalPrice = calculatePrice(prompt, maxOutputLength, model);
 
     const response: CalculatePriceResponse = {
@@ -30,7 +32,11 @@ export default function calculatePriceHandler(req: NextApiRequest, res: NextApiR
     };
 
     return res.status(200).json(response);
-  } catch (error) {
-    return res.status(500).json({ price: `Error: ${(error as Error).message}` });
+  } catch (error: any) {
+    if (typeof error.message === "string" && error.message.startsWith("Unknown model")) {
+      return res.status(400).json({ price: error.message });
+    } else {
+      return res.status(500).json({ price: `Error: ${error.message}` });
+    }
   }
 }
