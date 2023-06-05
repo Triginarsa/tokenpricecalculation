@@ -32,11 +32,29 @@ export default function Home() {
   }' https://tokencalculation.vercel.app/api/calculate-price`;
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(code);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 2000);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error('Failed to copy to clipboard:', error);
+        });
+    } else {
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    }
   };
 
   const handlePromptChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
