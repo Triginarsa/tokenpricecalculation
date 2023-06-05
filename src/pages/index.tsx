@@ -70,31 +70,31 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
+    <div className="">
         <div className="z-50 flex h-screen flex-col">
         {/* <Navbar /> */}
           {/* main content */}
           <main className="flex w-full flex-grow">
             <div className="mx-auto flex max-w-2xl flex-grow flex-col">
               <div className="flex flex-grow items-center justify-center">
-                <div className="mx-auto rounded-xl px-10 py-10">
+                <div className="mx-auto rounded-xl px-2 py-2 md:px-10 md:py-10">
                   <div className="mockup-window border bg-base-300">
                     <div className="px-4 py-16 bg-base-200 space-y-6">
                       <div>
-                        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Token Price Calculator</h1>
+                        <h1 className="scroll-m-20 text-4xl text-primary font-extrabold tracking-tight lg:text-5xl">Token Price Calculator</h1>
                         <p className="leading-7">Calculate token pricing for LLM model (OpenAI & VertexAI)</p>
                         <div className="divider"></div> 
                         </div>
                         <div className="w-full">
                         <label htmlFor="prompt" className="label">
-                          <span className="label-text">Enter the prompt:</span>
+                          <span className="label-text">Enter the prompt</span>
                         </label>
                           <textarea id="prompt" className="textarea textarea-bordered w-full" value={prompt} onChange={handlePromptChange} rows={4} />
                         </div>
                         <div className="flex flex-col space-y-6 space-x-0 md:flex-row md:space-y-0 md:space-x-3">
                           <div className="w-full">
                             <label htmlFor="maxOutputLength" className="label">
-                              <span className="label-text">Maximum output length:</span>
+                              <span className="label-text">Maximum output length</span>
                             </label>
                             <input
                               type="number"
@@ -107,7 +107,7 @@ export default function Home() {
                           </div>
                           <div className="w-full">
                             <label htmlFor="model" className="label">
-                              <span className="label-text">Select the model:</span>
+                              <span className="label-text">Select the model</span>
                             </label>
                             <select id="model" className="select select-bordered w-full max-w-xs" value={model} onChange={handleModelChange}>
                               <option value="" disabled selected>-- Select a model --</option>
