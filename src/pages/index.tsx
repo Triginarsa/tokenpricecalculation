@@ -23,6 +23,21 @@ export default function Home() {
   const [totalPrice, setTotalPrice] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const code = `curl -X POST -H "Content-Type: application/json" -d '{
+    "prompt": "Enter the prompt",
+    "maxOutputLength": 100,
+    "model": "gpt-4"
+  }' https://tokencalculation.vercel.app/api/calculate-price`;
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(code);
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
 
   const handlePromptChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
@@ -76,9 +91,9 @@ export default function Home() {
         {/* <Navbar /> */}
           {/* main content */}
           <main className="flex w-full flex-grow">
-            <div className="mx-auto flex max-w-2xl flex-grow flex-col w-100">
+            <div className="mx-auto flex max-w-2xl flex-grow flex-col">
               <div className="flex flex-grow items-center justify-center">
-                <div className="mx-auto rounded-xl px-2 py-2 md:px-10 md:py-10">
+                <div className="mx-auto rounded-xl px-4 py-4 md:px-10 md:py-10">
                   <div className="mockup-window border bg-base-300">
                     <div className="px-4 py-16 bg-base-200 space-y-6">
                       <div>
@@ -142,16 +157,24 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="mt-6">
-                    <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">Curl API</h3>
-                    <div className="mockup-code">
-                      <pre data-prefix=">"><code>curl -X POST -H &#34;Content-Type: application/json&#34; -d &#39;&#123;</code></pre> 
-                      <pre data-prefix=" "><code>&#34;prompt&#34;: &#34;Enter the prompt&#34;,</code></pre> 
-                      <pre data-prefix=" "><code>&#34;maxOutputLength&#34;: 100,</code></pre>
-                      <pre data-prefix=" "><code>&#34;model&#34;: &#34;gpt-4&#34;</code></pre>
-                      <pre data-prefix=" "><code>&#125;&#39; https://tokencalculation.vercel.app/api/calculate-price</code></pre>
-                      <pre data-prefix=" "><code></code></pre>
-                      <pre data-prefix=" " className="bg-warning text-warning-content"><code>&#123;&#34;price&#34;:&#34;0.0061&#34;&#125;%</code></pre>
+                  <div className="mt-6 max-w-[100vw]">
+                    <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">Curl API Example</h3>
+                    <div className="relative overflow-x-auto">
+                      <div className="mockup-code">
+                      <button
+                      className="absolute right-2 top-2 bg-primary px-2 py-1 rounded-md text-sm"
+                      onClick={copyToClipboard}
+                    >
+                      {isCopied ? 'Copied!' : 'Copy'}
+                    </button>
+                        <pre data-prefix=">"><code>curl -X POST -H &#34;Content-Type: application/json&#34; -d &#39;&#123;</code></pre> 
+                        <pre data-prefix=" "><code>&#34;prompt&#34;: &#34;Enter the prompt&#34;,</code></pre> 
+                        <pre data-prefix=" "><code>&#34;maxOutputLength&#34;: 100,</code></pre>
+                        <pre data-prefix=" "><code>&#34;model&#34;: &#34;gpt-4&#34;</code></pre>
+                        <pre data-prefix=" "><code>&#125;&#39; https://tokencalculation.vercel.app/api/calculate-price</code></pre>
+                        <pre data-prefix=" "><code></code></pre>
+                        <pre data-prefix=" " className="bg-warning text-warning-content"><code>&#123;&#34;price&#34;:&#34;0.0061&#34;&#125;%</code></pre>
+                      </div>
                     </div>
                   </div>
                 </div>
