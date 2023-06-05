@@ -6,15 +6,13 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [maxOutputLength, setMaxOutputLength] = useState(0);
   const [model, setModel] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState("");
 
   const handlePromptChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPrompt(event.target.value);
   };
 
-  const handleMaxOutputLengthChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleMaxOutputLengthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMaxOutputLength(parseInt(event.target.value, 10));
   };
 
@@ -29,7 +27,9 @@ export default function Home() {
         maxOutputLength,
         model,
       });
+
       const { price } = response.data;
+
       setTotalPrice(price);
     } catch (error) {
       console.error(error);
@@ -39,17 +39,9 @@ export default function Home() {
   return (
     <div>
       <label htmlFor="prompt">Enter the prompt:</label>
-      <textarea
-        id="prompt"
-        value={prompt}
-        onChange={handlePromptChange}
-        rows={4}
-        cols={50}
-      />
+      <textarea id="prompt" value={prompt} onChange={handlePromptChange} rows={4} cols={50} />
 
-      <label htmlFor="maxOutputLength">
-        Enter the maximum output length in tokens:
-      </label>
+      <label htmlFor="maxOutputLength">Enter the maximum output length in tokens:</label>
       <input
         id="maxOutputLength"
         type="number"
@@ -69,7 +61,7 @@ export default function Home() {
 
       <button onClick={handleCalculatePrice}>Calculate Price</button>
 
-      <p>Estimated price for your query would be: ${totalPrice}</p>
+      <p>Estimated price for your query would be: {totalPrice && `$${totalPrice}`}</p>
     </div>
   );
 }
