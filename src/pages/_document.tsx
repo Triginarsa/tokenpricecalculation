@@ -16,12 +16,12 @@ class MyDocument extends Document {
         <meta property="og:url" content="https://tokencalculation.vercel.app/" />
         <meta property="og:title" content="Token Price calculation" />
         <meta property="og:description" content="An calculator allows you to calculate the price of token usage based on a given prompt, maximum output length, and model. It utilizes the OpenAI API and VertexAI to perform the calculations." />
-        <meta property="og:image" content="thumbnail.png" />
+        <meta property="og:image" content="/thumbnail.png" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://tokencalculation.vercel.app/" />
         <meta property="twitter:title" content="Token Price calculation" />
         <meta property="twitter:description" content="Calculator allows you to calculate the price of token usage based on a given prompt, maximum output length, and model. It utilizes the OpenAI API and VertexAI to perform the calculations." />
-        <meta property="twitter:image" content="thumbnail.png" />
+        <meta property="twitter:image" content="/thumbnail.png" />
         <body>
           <Main />
           <NextScript />

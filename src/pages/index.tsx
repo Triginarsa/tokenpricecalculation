@@ -75,7 +75,7 @@ export default function Home() {
         {/* <Navbar /> */}
           {/* main content */}
           <main className="flex w-full flex-grow">
-            <div className="mx-auto flex max-w-2xl flex-grow flex-col">
+            <div className="mx-auto flex max-w-2xl flex-grow flex-col w-100">
               <div className="flex flex-grow items-center justify-center">
                 <div className="mx-auto rounded-xl px-2 py-2 md:px-10 md:py-10">
                   <div className="mockup-window border bg-base-300">
