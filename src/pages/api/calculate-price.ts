@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { calculatePrice, validateModel } from "@/calculatePrice";
+import { calculatePrice, validateModel, ModelNotFoundError } from "@/calculatePrice";
 
 interface CalculatePriceRequest {
   prompt: string;
@@ -9,17 +9,21 @@ interface CalculatePriceRequest {
 
 interface CalculatePriceResponse {
   price: string;
+  error?: {
+    code: number;
+    message: string;
+  };
 }
 
 export default function calculatePriceHandler(req: NextApiRequest, res: NextApiResponse<CalculatePriceResponse>) {
   if (req.method !== "POST") {
-    return res.status(405).json({ price: "Method Not Allowed" });
+    return res.status(405).json({ error: { code: 405, message: "Method Not Allowed" }, price: "" });
   }
 
   const { prompt, maxOutputLength, model }: CalculatePriceRequest = req.body;
 
   if (!prompt || typeof maxOutputLength !== "number" || !model) {
-    return res.status(400).json({ price: "Invalid input" });
+    return res.status(400).json({ error: { code: 400, message: "Invalid input" }, price: "" });
   }
 
   try {
@@ -33,10 +37,10 @@ export default function calculatePriceHandler(req: NextApiRequest, res: NextApiR
 
     return res.status(200).json(response);
   } catch (error: any) {
-    if (typeof error.message === "string" && error.message.startsWith("Unknown model")) {
-      return res.status(400).json({ price: error.message });
+    if (error instanceof ModelNotFoundError) {
+      return res.status(400).json({ error: { code: 400, message: error.message }, price: "" });
     } else {
-      return res.status(500).json({ price: `Error: ${error.message}` });
+      return res.status(500).json({ error: { code: 500, message: "An unexpected error occurred" }, price: "" });
     }
   }
 }

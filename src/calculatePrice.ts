@@ -19,9 +19,16 @@ export interface Price {
     "chat-bison@001": { prompt: 0.0005, completion: 0.0005 },
   };
   
+  export class ModelNotFoundError extends Error {
+    constructor(model: string) {
+      super(`Unknown model ${model}. Available models: ${Object.keys(PRICES).join(", ")}`);
+      this.name = "ModelNotFoundError";
+    }
+  }
+  
   export function validateModel(model: string): void {
     if (!(model in PRICES)) {
-      throw new Error(`Unknown model ${model}. Available models: ${Object.keys(PRICES).join(", ")}`);
+      throw new ModelNotFoundError(model);
     }
   }
   

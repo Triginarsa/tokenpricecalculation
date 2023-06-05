@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import axios from "axios";
-import { PRICES, calculatePrice } from "@/calculatePrice";
+import { PRICES, ModelNotFoundError } from "@/calculatePrice";
 
 interface SelectOption {
   value: string;
@@ -8,8 +8,13 @@ interface SelectOption {
 }
 
 interface CalculatePriceResponse {
-  price: string;
+  price?: string;
+  error?: {
+    code: number;
+    message: string;
+  };
 }
+
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [maxOutputLength, setMaxOutputLength] = useState(0);
@@ -36,15 +41,20 @@ export default function Home() {
         maxOutputLength,
         model,
       });
-
-      const { price } = response.data;
-
-      setTotalPrice(price);
+  
+      if (response.data.error) {
+        setErrorMessage(response.data.error.message);
+        setTotalPrice("");
+      } else {
+        setTotalPrice(response.data.price || "");
+        setErrorMessage("");
+      }
     } catch (error) {
       setErrorMessage("Error calculating price. Please try again."); // or use error.message to display the specific error
       console.error(error);
     }
   };
+  
 
   const modelOptions: SelectOption[] = Object.keys(PRICES).map((modelName) => ({
     value: modelName,
@@ -56,15 +66,15 @@ export default function Home() {
       <label htmlFor="prompt">Enter the prompt:</label>
       <textarea id="prompt" value={prompt} onChange={handlePromptChange} rows={4} cols={50} />
 
-      <label htmlFor="maxOutputLength">Enter the maximum output length in tokens:</label>
+      <label htmlFor="maxOutputLength">Enter the maximum output length:</label>
       <input
-        id="maxOutputLength"
         type="number"
+        id="maxOutputLength"
         value={maxOutputLength}
         onChange={handleMaxOutputLengthChange}
       />
 
-      <label htmlFor="model">Select a model:</label>
+      <label htmlFor="model">Select the model:</label>
       <select id="model" value={model} onChange={handleModelChange}>
         <option value="">-- Select a model --</option>
         {modelOptions.map((option) => (
@@ -76,9 +86,8 @@ export default function Home() {
 
       <button onClick={handleCalculatePrice}>Calculate Price</button>
 
-      {errorMessage && <p>{errorMessage}</p>}
-
-      {totalPrice && <p>Estimated price for your query would be: ${totalPrice}</p>}
+      {totalPrice && <p>Total Price: {totalPrice}</p>}
+      {errorMessage && <p>Error: {errorMessage}</p>}
     </div>
   );
 }
