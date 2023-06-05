@@ -159,7 +159,7 @@ export default function Home() {
                   
                   <div className="mt-6 max-w-[100vw]">
                     <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">Curl API Example</h3>
-                    <div className="relative overflow-x-auto">
+                    <div className="relative">
                       <div className="mockup-code">
                       <button
                       className="absolute right-2 top-2 bg-primary px-2 py-1 rounded-md text-sm"
@@ -167,12 +167,14 @@ export default function Home() {
                     >
                       {isCopied ? 'Copied!' : 'Copy'}
                     </button>
-                        <pre data-prefix=">"><code>curl -X POST -H &#34;Content-Type: application/json&#34; -d &#39;&#123;</code></pre> 
+                    <div className="overflow-x-auto">
+                    <pre data-prefix=">"><code>curl -X POST -H &#34;Content-Type: application/json&#34; -d &#39;&#123;</code></pre> 
                         <pre data-prefix=" "><code>&#34;prompt&#34;: &#34;Enter the prompt&#34;,</code></pre> 
                         <pre data-prefix=" "><code>&#34;maxOutputLength&#34;: 100,</code></pre>
                         <pre data-prefix=" "><code>&#34;model&#34;: &#34;gpt-4&#34;</code></pre>
                         <pre data-prefix=" "><code>&#125;&#39; https://tokencalculation.vercel.app/api/calculate-price</code></pre>
                         <pre data-prefix=" "><code></code></pre>
+                    </div>
                         <pre data-prefix=" " className="bg-warning text-warning-content"><code>&#123;&#34;price&#34;:&#34;0.0061&#34;&#125;%</code></pre>
                       </div>
                     </div>
