@@ -26,11 +26,11 @@ export default function calculatePriceHandler(req: NextApiRequest, res: NextApiR
     const totalPrice = calculatePrice(prompt, maxOutputLength, model);
 
     const response: CalculatePriceResponse = {
-      price: totalPrice.toString(),
+      price: totalPrice.toFixed(4),
     };
 
     return res.status(200).json(response);
   } catch (error) {
-    return res.status(500).json({ price: "Error: " + (error as Error).message });
+    return res.status(500).json({ price: `Error: ${(error as Error).message}` });
   }
 }

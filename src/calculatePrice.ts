@@ -1,4 +1,9 @@
-export const PRICES: Record<string, { prompt: number; completion: number }> = {
+export interface Price {
+    prompt: number;
+    completion: number;
+  }
+  
+  export const PRICES: Record<string, Price> = {
     // OpenAI models' pricing per 1K tokens
     Ada: { prompt: 0.0004, completion: 0.0004 },
     Babbage: { prompt: 0.0005, completion: 0.0005 },
